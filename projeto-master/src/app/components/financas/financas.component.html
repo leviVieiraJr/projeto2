@@ -1,0 +1,51 @@
+<div class="layout">
+  <aside class="sidebar">
+    <img src="../../../assets/WhatsApp_Image_2024-03-08_at_16.15.20-removebg-preview.png" alt="Logo" width="200px">
+    <nav>
+      <ul>
+        <li><a routerLink="/home">Home</a></li>
+        <li><a routerLink="/financas">Finanças</a></li>
+        <li><a routerLink="/estoque">Estoque</a></li>
+        <li><a routerLink="/clientes">Clientes</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <div class="financas-container">
+    <div class="registro-venda">
+      <h2>Registrar Venda</h2>
+      <form (ngSubmit)="registrarVenda()" [formGroup]="vendaForm">
+        <label for="produto">Produto:</label>
+        <select id="produto" formControlName="produto" required>
+          <!-- Exibe uma lista de produtos, se disponível -->
+          <option *ngIf="produtos.length === 0" disabled>Carregando produtos...</option>
+          <option *ngFor="let produto of produtos" [value]="produto.nome">
+            {{ produto.nome }}
+          </option>
+        </select>
+
+        <label for="quantidade">Quantidade:</label>
+        <input id="quantidade" type="number" formControlName="quantidade" min="1" required />
+
+        <label for="valor">Valor Unitário:</label>
+        <input id="valor" type="number" formControlName="valor" min="0" step="0.01" required />
+
+        <button type="submit" [disabled]="vendaForm.invalid">Registrar Venda</button>
+      </form>
+    </div>
+
+    <div class="historico-vendas">
+      <h3>Histórico de Vendas</h3>
+      <!-- Exibe as vendas registradas -->
+      <div *ngIf="vendas.length === 0">
+        <p>Nenhuma venda registrada.</p>
+      </div>
+      <div *ngFor="let venda of vendas">
+        <p>Produto: {{ venda.produto }}</p>
+        <p>Quantidade: {{ venda.quantidade }}</p>
+        <p>Valor Total: R$ {{ (venda.valor * venda.quantidade) | number: '1.2-2' }}</p>
+        <p>Data: {{ venda.data | date: 'dd/MM/yyyy' }}</p>
+      </div>
+    </div>
+  </div>
+</div>

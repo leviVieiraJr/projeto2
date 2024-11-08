@@ -1,0 +1,45 @@
+<div class="layout">
+  <aside class="sidebar">
+    <img src="../../../assets/WhatsApp_Image_2024-03-08_at_16.15.20-removebg-preview.png" alt="Logo" width="200px">
+    <nav>
+      <ul>
+        <li><a routerLink="/home">Home</a></li>
+        <li><a routerLink="/financas">Finanças</a></li>
+        <li><a routerLink="/estoque">Estoque</a></li>
+        <li><a routerLink="/clientes">Clientes</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <h2>Login</h2> 
+
+    <!-- Exibe mensagens de erro -->
+    <div *ngIf="loginError" class="error-message">
+      <p>Login falhou. Verifique suas credenciais e tente novamente.</p>
+    </div>
+
+    <!-- Formulário de login -->
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <label for="username">Usuário:</label>
+      <input
+        type="text"
+        id="username"
+        formControlName="username"
+        placeholder="Digite seu usuário"
+      />
+
+      <label for="password">Senha:</label>
+      <input
+        type="password"
+        id="password"
+        formControlName="password"
+        placeholder="Digite sua senha"
+      />
+
+      <div id="botao">
+        <button type="submit" [disabled]="loginForm.invalid">Entrar</button>
+      </div>
+    </form>
+  </main>
+</div>

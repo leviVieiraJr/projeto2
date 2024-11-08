@@ -1,0 +1,57 @@
+<div class="layout">
+  <aside class="sidebar">
+    <img src="../../../assets/WhatsApp_Image_2024-03-08_at_16.15.20-removebg-preview.png" alt="" width="200px">
+    <nav>
+      <ul>
+        <li><a routerLink="/home">Home</a></li>
+        <li><a routerLink="/financas">Finanças</a></li>
+        <li><a routerLink="/estoque">Estoque</a></li>
+        <li><a routerLink="/clientes">Clientes</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <h2>Estoque</h2>
+    <p>Pesquise por um produto no estoque.</p>
+
+    <!-- Barra de pesquisa -->
+    <input
+      type="text"
+      placeholder="Digite o nome do produto"
+      (input)="onSearch($event)"
+      class="search-bar"
+    />
+
+    <!-- Layout para adicionar produto e lista de estoque lado a lado -->
+    <div class="estoque-layout">
+      <!-- Formulário para adicionar itens ao estoque -->
+      <div class="adicionar-estoque">
+        <h3>Adicionar Item ao Estoque</h3>
+        <form [formGroup]="adicionarEstoqueForm" (ngSubmit)="onAddItem()">
+          <label for="novoNomeProduto">Nome do Produto:</label>
+          <input type="text" id="novoNomeProduto" formControlName="nomeProduto" required />
+
+          <label for="novaCategoria">Categoria:</label>
+          <input type="text" id="novaCategoria" formControlName="categoria" required />
+
+          <label for="quantidade">Quantidade:</label>
+          <input type="number" id="quantidade" formControlName="quantidade" required />
+
+          <button type="submit">Adicionar ao Estoque</button>
+        </form>
+      </div>
+
+      <!-- Lista de produtos no estoque -->
+      <div class="lista-estoque">
+        <h3>Produtos no Estoque:</h3>
+        <ul *ngIf="filteredEstoque.length > 0">
+          <li *ngFor="let produto of filteredEstoque">
+            {{ produto.nomeProduto }} - {{ produto.categoria }}: {{ produto.quantidade }} unidades
+          </li>
+        </ul>
+        <p *ngIf="filteredEstoque.length === 0">Nenhum produto encontrado.</p>
+      </div>
+    </div>
+  </main>
+</div>

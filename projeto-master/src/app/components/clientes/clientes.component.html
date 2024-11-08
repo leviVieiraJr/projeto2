@@ -1,0 +1,36 @@
+<div class="layout">
+  <aside class="sidebar">
+    <img src="../../../assets/WhatsApp_Image_2024-03-08_at_16.15.20-removebg-preview.png" alt="" width="200px">
+    <nav>
+      <ul>
+        <li><a routerLink="/home">Home</a></li>
+        <li><a routerLink="/financas">Finanças</a></li>
+        <li><a routerLink="/estoque">Estoque</a></li>
+        <li><a routerLink="/clientes">Clientes</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <main class="clientes-container">
+    <div class="cadastro-cliente">
+      <h2>Cadastrar Cliente</h2>
+      <input type="text" [(ngModel)]="novoCliente.nome" placeholder="Nome" />
+      <input type="email" [(ngModel)]="novoCliente.email" placeholder="E-mail" />
+      <input type="tel" [(ngModel)]="novoCliente.telefone" placeholder="Telefone" />
+      <input type="text" [(ngModel)]="novoCliente.cpf" placeholder="CPF" />
+      <input type="text" [(ngModel)]="novoCliente.endereco" placeholder="Endereço" />
+      <button (click)="cadastrarCliente()">Cadastrar Cliente</button>
+    </div>
+
+    <div class="lista-clientes">
+      <h3>Clientes Cadastrados</h3>
+      <input type="text" [(ngModel)]="pesquisa" placeholder="Buscar Cliente" />
+
+      <ul>
+        <li *ngFor="let cliente of buscarClientes()">
+          Nome: {{ cliente.nome }} - E-mail: {{ cliente.email }} - Telefone: {{ cliente.telefone }} - CPF: {{ cliente.cpf }} - Endereço: {{ cliente.endereco }}
+        </li>
+      </ul>
+    </div>
+  </main>
+</div>
